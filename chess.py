@@ -3,11 +3,11 @@ import chess.svg
 
 from IPython.display import SVG
 
-board = chess.Board()
 SVG(chess.svg.board(board=board,size=400))
+board = chess.Board()
 
 
-def eval_board():
+def e_b():
     if board.is_checkmate():
         if board.turn:
             return -9999
@@ -18,12 +18,13 @@ def eval_board():
     if board.is_stalemate():
         return 0
 
-    wp = len(board.pieces(chess.PAWN, chess.WHITE))
+
     bp = len(board.pieces(chess.PAWN, chess.BLACK))
+    wp = len(board.pieces(chess.PAWN, chess.WHITE))
     wn = len(board.pieces(chess.KNIGHT, chess.WHITE))
     bn = len(board.pieces(chess.KNIGHT, chess.BLACK))
-    wb = len(board.pieces(chess.BISHOP, chess.WHITE))
     bb = len(board.pieces(chess.BISHOP, chess.BLACK))
+    wb = len(board.pieces(chess.BISHOP, chess.WHITE))
     wr = len(board.pieces(chess.ROOK, chess.WHITE))
     br = len(board.pieces(chess.ROOK, chess.BLACK))
     wq = len(board.pieces(chess.QUEEN, chess.WHITE))
@@ -34,12 +35,12 @@ def eval_board():
     pawnsq = sum([pawntable[i] for i in board.pieces(chess.PAWN, chess.WHITE)])
     pawnsq = pawnsq + sum([-pawntable[chess.square_mirror(i)]
                            for i in board.pieces(chess.PAWN, chess.BLACK)])
-    knightsq = sum([knightstable[i] for i in board.pieces(chess.KNIGHT, chess.WHITE)])
-    knightsq = knightsq + sum([-knightstable[chess.square_mirror(i)]
-                               for i in board.pieces(chess.KNIGHT, chess.BLACK)])
     bishopsq = sum([bishopstable[i] for i in board.pieces(chess.BISHOP, chess.WHITE)])
     bishopsq = bishopsq + sum([-bishopstable[chess.square_mirror(i)]
                                for i in board.pieces(chess.BISHOP, chess.BLACK)])
+    knightsq = sum([knightstable[i] for i in board.pieces(chess.KNIGHT, chess.WHITE)])
+    knightsq = knightsq + sum([-knightstable[chess.square_mirror(i)]
+                               for i in board.pieces(chess.KNIGHT, chess.BLACK)])
     rooksq = sum([rookstable[i] for i in board.pieces(chess.ROOK, chess.WHITE)])
     rooksq = rooksq + sum([-rookstable[chess.square_mirror(i)]
                            for i in board.pieces(chess.ROOK, chess.BLACK)])
